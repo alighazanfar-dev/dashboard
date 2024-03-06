@@ -4,7 +4,14 @@ import Slider from "@mui/material/Slider";
 import ReactSelect from "react-select";
 import Fade from "@mui/material/Fade";
 
-const TabContent = ({ title, options, selectedOptions, onSelectOption }) => {
+const TabContent = ({
+  title,
+  options,
+  selectedOptions,
+  onSelectOption,
+  sliderValue,
+  onSliderChange,
+}) => {
   const handleOptionSelect = (selected) => {
     onSelectOption(selected);
   };
@@ -44,6 +51,10 @@ const TabContent = ({ title, options, selectedOptions, onSelectOption }) => {
     }),
   };
 
+  const handleSliderChange = (event, newValue) => {
+    onSliderChange(newValue);
+  };
+
   return (
     <div className="mt-4">
       <Fade in={true} unmountOnExit style={{ transformOrigin: "0 0 0" }}>
@@ -65,11 +76,12 @@ const TabContent = ({ title, options, selectedOptions, onSelectOption }) => {
             <p className="pr-1">100</p>{" "}
             <Slider
               aria-label="Set length of discussion"
-              value={500}
+              value={sliderValue}
               min={100}
               max={1000}
               step={10}
               valueLabelDisplay="on"
+              onChange={handleSliderChange}
             />
             <p className="pl-1">1000</p>
           </div>

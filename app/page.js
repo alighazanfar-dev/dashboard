@@ -20,10 +20,17 @@ import {
 
 export default function Home() {
   const [selectedOptions, setSelectedOptions] = useState({});
+  const [sliderValues, setSliderValues] = useState({});
   const handleOptionSelect = (selected) => {
     setSelectedOptions((prevSelectedOptions) => ({
       ...prevSelectedOptions,
-      [selectedTab.id]: selected, // Store selected options for the current tab
+      [selectedTab.id]: selected,
+    }));
+  };
+  const handleSliderChange = (value) => {
+    setSliderValues((prevSliderValues) => ({
+      ...prevSliderValues,
+      [selectedTab.id]: value,
     }));
   };
   const tab = [
@@ -147,6 +154,8 @@ export default function Home() {
               options={selectedTab.options}
               selectedOptions={selectedOptions[selectedTab.id] || null}
               onSelectOption={(selected) => handleOptionSelect(selected)}
+              sliderValue={sliderValues[selectedTab.id] || 500}
+              onSliderChange={(value) => handleSliderChange(value)}
             />
           </div>
         </div>
