@@ -19,6 +19,13 @@ import {
 } from "./utlis/options";
 
 export default function Home() {
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const handleOptionSelect = (selected) => {
+    setSelectedOptions((prevSelectedOptions) => ({
+      ...prevSelectedOptions,
+      [selectedTab.id]: selected, // Store selected options for the current tab
+    }));
+  };
   const tab = [
     {
       id: 1,
@@ -74,7 +81,7 @@ export default function Home() {
       options: investmentOptions,
       content: (
         <div className="mt-5">
-          <h3 className="font-medium text-[20px] pb-4" >
+          <h3 className="font-medium text-[20px] pb-4">
             Which type of “Investment” content do you want to create?
           </h3>
         </div>
@@ -97,7 +104,6 @@ export default function Home() {
   const [selectedTab, setSelectedTab] = useState(tab[0]);
 
   const handleChangeTab = (tabs) => {
-    console.log("tabs are: ", tabs);
     setSelectedTab(tabs);
   };
 
@@ -139,6 +145,8 @@ export default function Home() {
             <TabContent
               title={selectedTab.title}
               options={selectedTab.options}
+              selectedOptions={selectedOptions[selectedTab.id] || null}
+              onSelectOption={(selected) => handleOptionSelect(selected)}
             />
           </div>
         </div>

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import ReactSelect from "react-select";
 import Fade from "@mui/material/Fade";
 
-const TabContent = ({ title, options }) => {
+const TabContent = ({ title, options, selectedOptions, onSelectOption }) => {
+  const handleOptionSelect = (selected) => {
+    onSelectOption(selected);
+  };
+
   const customStyles = {
     control: (base, state) => ({
       ...base,
@@ -49,6 +53,8 @@ const TabContent = ({ title, options }) => {
             options={options}
             isSearchable
             isClearable
+            value={selectedOptions}
+            onChange={handleOptionSelect}
           />
           <div className="mt-5 mb-10">
             <h3 className="font-medium text-[20px] pb-4">
